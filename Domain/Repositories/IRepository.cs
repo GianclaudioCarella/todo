@@ -9,8 +9,10 @@ namespace Domain.Repositories
     public interface IRepository
     {
         List<Todo> GetTodos();
+        List<Todo> GetPendingTodos();
         Todo GetTodo(Guid id);
         void CreateTodo(Todo todo);
         void ChangeStateTodo(Guid id, TodoState state);
+        void Update(Todo todo);
     }
 }

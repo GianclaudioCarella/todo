@@ -1,3 +1,4 @@
+using Domain.Handlers;
 using Domain.Repositories;
 using Infrastructure.DataContexts;
 using Infrastructure.Repositories;
@@ -28,6 +29,7 @@ namespace Web
                 options.UseInMemoryDatabase("InMemoryDatabase"));
 
             services.AddTransient<IRepository, TodoRepository>();
+            services.AddTransient<ITodoHandler, TodoHandler>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 

@@ -1,8 +1,6 @@
 ﻿using Domain.Commands;
 using FluentValidation;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Domain.Validations
 {
@@ -27,10 +25,5 @@ namespace Domain.Validations
         {
             RuleFor(c => c.Id).NotEqual(Guid.Empty);
         }
-
-
-
     }
-
-
 }

@@ -2,13 +2,13 @@
 using Domain.Entities;
 using Domain.Repositories;
 using Shared.Commands;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Domain.Handlers
 {
-    public class TodoHandler : ICommandHandler<RegisterNewTodoCommand>
+    public class TodoHandler : 
+        ICommandHandler<RegisterNewTodoCommand>, 
+        ICommandHandler<UpdateTodoCommand>,
+        ITodoHandler
     {
         private readonly IRepository _repository;
 
@@ -27,6 +27,21 @@ namespace Domain.Handlers
             _repository.CreateTodo(todo);
 
             return new CommandResult(true, "Todo Created");
+        }
+
+        public ICommandResult Handle(UpdateTodoCommand command)
+        {
+            if (!command.IsValid())
+                return new CommandResult(false, "Invalid Todo");
+
+            var todo = _repository.GetTodo(command.Id);
+            todo.Description = command.Description;
+            todo.State = command.State;
+            todo.File = command.File;
+
+            _repository.Update(todo);
+
+            return new CommandResult(true, "Todo Updated");
         }
     }
 }

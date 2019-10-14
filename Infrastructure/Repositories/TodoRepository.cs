@@ -37,7 +37,18 @@ namespace Infrastructure.Repositories
 
         public List<Todo> GetTodos()
         {
+            return _context.Todo.ToList();
+        }
+
+        public List<Todo> GetPendingTodos()
+        {
             return _context.Todo.Where(t => t.State.Equals(TodoState.Created)).ToList();
+        }
+
+        public async void Update(Todo todo)
+        {
+            var pobjTodo = _context.Todo.Update(todo);
+            await _context.SaveChangesAsync();
         }
     }
 }

@@ -1,9 +1,6 @@
 ﻿using Domain.Enum;
 using Domain.Validations;
 using FluentValidation.Results;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Domain.Commands
 {
